@@ -69,5 +69,20 @@ const exportHsbAndWhshtAllSpuId = async() => {
     }
 };
 
+const getAllAhsSpu = async() => {
+    try {
+        let res = await spuService.getAllAhsTablePC();
+        let pids= [];
+        for(let item of res){
+            pids.push(parseInt(item.pid))
+        }
+        console.info('pids: %j', pids);
+        return pids;
+    } catch (e) {
+        console.error(e);
+        return e;
+    }
+};
 
-exportHsbAndWhshtAllSpuId();
+
+getAllAhsSpu();

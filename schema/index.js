@@ -13,17 +13,16 @@ const {host, port, dbname} = config.mongodb;
     }
 })();
 
-
-
+const {ahsSpu} = require('../model/ahsSpu');
 const {hsbSpu} = require('../model/hsbSpu');
 const {whshtSpu} = require('../model/whshtSpu');
 
-/**
- * 设置数据源
- */
+
 const syncDB = () => {
+    global['$ahsSpu'] = mongoose.model('ahsSpu', ahsSpu, 'ahsSpu');
     global['$hsbSpu'] = mongoose.model('hsbSpu', hsbSpu, 'hsbSpu');
     global['$whshtSpu'] = mongoose.model('whshtSpu', whshtSpu, 'whshtSpu');
 };
+
 
 syncDB();
