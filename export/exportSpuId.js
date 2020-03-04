@@ -33,6 +33,31 @@ const getHsbAndWhshtAllSpuId = async() => {
     }
 };
 
+const get_pjt_spus = async() => {
+
+    const pjt_spu_res = await spuService.get_All_PJT_SPU();
+    console.info('pjt_spu_res.size: %d', pjt_spu_res.length);
+    const header = ['品牌','机型ID', '机型名称'];
+    const final = [];
+    final.push(header);
+
+    for(const item of pjt_spu_res){
+        const row = [];
+        row.push(item.bname);
+        row.push(item.pid);
+        row.push(item.pname);
+        final.push(row);
+    }
+
+    const fileName = '拍机堂APP机型.xlsx';
+    const fileDir = `${DOWNLOAD_PATH}/${fileName}`;
+    await fs.ensureDir(DOWNLOAD_PATH);
+    fs.writeFileSync(fileDir, xlsx.build([
+        {name: "拍机堂APP", data: final}
+    ]));
+    console.info(`文件已导出: ${fileDir}`);
+    return {err: null, fileName};
+};
 
 const exportHsbAndWhshtAllSpuId = async() => {
     try {
@@ -85,4 +110,4 @@ const getAllAhsSpu = async() => {
 };
 
 
-getAllAhsSpu();
+get_pjt_spus();

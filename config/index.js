@@ -20,8 +20,17 @@ const config = {
         DOWNLOAD_PATH: path.join(__dirname, '..','download')
     },
 
+    local_test: {
+        mongodb: {
+            host: '139.199.59.214',
+            port: 8777,
+            dbname: 'evaluate'
+        },
+        DOWNLOAD_PATH: path.join(__dirname, '..','download')
+    },
+
     env: function () {
-        return global.$config = this.production
+        return global.$config = this.local_test
     }
 };
 

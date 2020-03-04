@@ -31,7 +31,20 @@ const getAllAhsTablePC = async() => {
     }
 };
 
+const get_All_PJT_SPU = async() => {
+    try {
+        let result = await $spuBasisInfo.find({"channel": 3});
+        console.info(`spuBasisInfo.size: ${result.length}`);
+        return result;
+    } catch (e) {
+        console.error(e);
+        return e;
+    }
+};
+
+
 
 exports.getAllhsbSpu = getAllhsbSpu;
 exports.getAllWhshtSpu = getAllWhshtSpu;
 exports.getAllAhsTablePC = getAllAhsTablePC;
+exports.get_All_PJT_SPU = get_All_PJT_SPU;
